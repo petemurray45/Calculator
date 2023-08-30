@@ -17,6 +17,14 @@ body {
 
 
 .display-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+   
+}
+
+.keys {
     display: grid;
     justify-content: center;
     align-content: center;
@@ -27,7 +35,7 @@ body {
    
 }
 
-.display-grid > button {
+.keys > button {
     cursor: pointer;
     font-size: 2rem;
     border: 1px solid black;
@@ -47,11 +55,12 @@ body {
 }
 
 .output {
-    grid-column: 1 / -1;
+    
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
     flex-direction: column;
+    width: 408px;
     padding: 10px;
     font-size: 2rem;
     color: white;

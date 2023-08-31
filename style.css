@@ -17,14 +17,6 @@ body {
 
 
 .display-grid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-   
-}
-
-.keys {
     display: grid;
     justify-content: center;
     align-content: center;
@@ -35,7 +27,7 @@ body {
    
 }
 
-.keys > button {
+.display-grid > button {
     cursor: pointer;
     font-size: 2rem;
     border: 1px solid black;
@@ -55,12 +47,11 @@ body {
 }
 
 .output {
-    
+    grid-column: 1 / -1;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
     flex-direction: column;
-    width: 408px;
     padding: 10px;
     font-size: 2rem;
     color: white;
@@ -72,8 +63,8 @@ body {
 }
 
 .output .previous-operand {
-    font-size: 1.25rem;
-    margin-bottom: 7px;
+    font-size: 1.5rem;
+    color: whitesmoke;
 }
 
 .footer {

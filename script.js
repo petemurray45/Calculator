@@ -5,8 +5,7 @@ const deleteBtn = document.querySelector('[data-delete]');
 const numberBtn = document.querySelectorAll('[data-number]');
 const operationBtn = document.querySelectorAll('[data-operation]');
 const equalsBtn = document.querySelector('[data-equals]');
-const prevOperand = document.querySelector('[data-previous-operand]');
-const currentOperand = document.querySelector('[data-current-operand]');
+const display = document.querySelector('[data-current-operand]');
 const keys = document.querySelectorAll(".key")
 
 
@@ -20,9 +19,21 @@ for(i = 0; i < keys.length; i++){
             const key = e.target;
             const action = key.dataset.action;
             const keyContent = key.textContent;
-            const displayedNum = display
+            const displayedNum = display.textContent;
+
+            
+
+        
             if(!action){
-                console.log('number-key')
+               if(displayedNum === '0'){
+                display.textContent = keyContent;
+               } else {
+                display.textContent = displayedNum + keyContent;
+               }
+
+
+
+
             } if(
                 action === "add" || 
                 action === "subract" ||
@@ -30,41 +41,47 @@ for(i = 0; i < keys.length; i++){
                 action === "divide"
             ){
                 console.log("operator-key")
+                key.dataset.previousKeyType = "operator";
+
+
+
+
             } if(action === "clear"){
                 console.log("clear-key")
+                display.textContent = "0"
+
+
             } if(action === "decimal"){
                 console.log("decimal-key")
+                display.textContent = display.textContent + ".";
+
+
             } if(action === "calculate"){
                 console.log("calculate-key")
+
+
             } if(action === "delete"){
                 console.log("delete-key")
+                display.textContent = display.textContent.slice(0, -1);
+                
             }
+
                 
         }
     })
 }
 
 
+
+
+
+
+
 // calculator functions 
 
-function divide(prevOperand, currentOperand){
+function calculate(){
 
-    return prevOperand/currentOperand;
-}
 
-function multiply(prevOperand, currentOperand){
-
-    return prevOperand * currentOperand;
-}
-
-function add(prevOperand, currentOperand){
-
-    return prevOperand + currentOperand;
-}
-
-function subtract(prevOperand, currentOperand){
-    
-    return prevOperand - currentOperand;
 }
 
 

@@ -2,40 +2,76 @@ class Calculator {
     constructor(previousNumberTextElement, currentNumberTextELement){
         this.previousNumberTextElement = previousNumberTextElement
         this.currentNumberTextELement = currentNumberTextELement
+        this.clear()
 
     }
 
     clear() {
-        this.currentNumber = " "
-        this.previousNumber = " "
+        this.currentNumber = ""
+        this.previousNumber = ""
         this.operation = undefined;
 
     }
 
     delete(){
+        this.currentNumber = this.currentNumber.toString().slice(0, -1)
 
 
     }
 
     appendNumber(number){
-        if(number === ".") return
+        if(number === "." && this.currentNumber.includes(".")) return;
         this.currentNumber = this.currentNumber.toString() + number.toString()
 
 
     }
 
     chooseOperation(operation){
+        if(this.currentNumber === "") return; 
+        if(this.previousNumber !== ""){
+            this.compute()
+        }
+        this.operation = operation;
+        this.previousNumber = this.currentNumber;
+        this.currentNumber = ""
+        
 
 
     }
 
     compute(){
+        let computation;
+        let current = parseFloat(this.currentNumber);
+        let previous = parseFloat(this.previousNumber);
+        if(isNaN(current) || isNaN(previous)) return;
+        switch(this.operation){
+            case "+":
+                computation = previous + current;
+                break;
+            case "-":
+                computation = previous - current;
+                break;
+            case "x":
+                computation = previous * current;
+                break;
+            case "%":
+                computation = previous / current;
+                break;
+            default:
+                return;
+
+        }
+        this.currentNumber = computation;
+        this.operation = undefined;
+        this.previousNumber = "";
 
 
     }
 
     updateDisplay(){
         this.currentNumberTextELement.innerText = this.currentNumber; 
+        this.previousNumberTextElement.innerText = this.previousNumber;
+
 
 
 
@@ -68,8 +104,24 @@ numberBtn.forEach(button => {
     })
 })
 
+operationBtn.forEach(button => {
+    button.addEventListener("click", () => {
+        calculator.chooseOperation(button.innerText)
+        calculator.updateDisplay()
+    })
+})
 
+equalsBtn.addEventListener("click", button => {
+    calculator.compute()
+    calculator.updateDisplay()
+})
 
+clearBtn.addEventListener("click", button => {
+    calculator.clear()
+    calculator.updateDisplay()
+})
 
-
-
+deleteBtn.addEventListener("click", button => {
+    calculator.delete()
+    calculator.updateDisplay()
+})

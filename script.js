@@ -1,3 +1,5 @@
+//class used to house functions for calculator and to recieve info from event listeners
+
 class Calculator {
     constructor(previousNumberTextElement, currentNumberTextELement){
         this.previousNumberTextElement = previousNumberTextElement
@@ -14,36 +16,33 @@ class Calculator {
     }
 
     delete(){
-        this.currentNumber = this.currentNumber.toString().slice(0, -1)
-
+        this.currentNumber = this.currentNumber.toString().slice(0, -1) //removes last digit
 
     }
 
     appendNumber(number){
-        if(number === "." && this.currentNumber.includes(".")) return;
-        this.currentNumber = this.currentNumber.toString() + number.toString()
+        if(number === "." && this.currentNumber.includes(".")) return; // prevents from typing more than one "."
+        this.currentNumber = this.currentNumber.toString() + number.toString() // converts numbers to strings
 
 
     }
 
     chooseOperation(operation){
-        if(this.currentNumber === "") return; 
+        if(this.currentNumber === "") return; // prevents from executing function if operator pressed multiple times
         if(this.previousNumber !== ""){
             this.compute()
         }
         this.operation = operation;
         this.previousNumber = this.currentNumber;
         this.currentNumber = ""
-        
-
 
     }
 
     compute(){
         let computation;
-        let current = parseFloat(this.currentNumber);
+        let current = parseFloat(this.currentNumber); //converts strings to numbers
         let previous = parseFloat(this.previousNumber);
-        if(isNaN(current) || isNaN(previous)) return;
+        if(isNaN(current) || isNaN(previous)) return; // if button is not a number (i.e an operation button) function wont execute
         switch(this.operation){
             case "+":
                 computation = previous + current;
@@ -71,16 +70,8 @@ class Calculator {
     updateDisplay(){
         this.currentNumberTextELement.innerText = this.currentNumber; 
         this.previousNumberTextElement.innerText = this.previousNumber;
-
-
-
-
     }
-
-
-
 }
-
 
 
 //DOM selectors
@@ -96,6 +87,7 @@ const calculator = new Calculator(previousNumberTextElement, currentNumberTextEL
 
 
 
+//Event listeners for each of the buttons
 
 numberBtn.forEach(button => {
     button.addEventListener("click", () => {

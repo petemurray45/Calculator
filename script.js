@@ -53,7 +53,7 @@ class Calculator {
             case "x":
                 computation = previous * current;
                 break;
-            case "%":
+            case "÷":
                 computation = previous / current;
                 break;
             default:
